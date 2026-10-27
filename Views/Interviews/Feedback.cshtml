@@ -1,0 +1,56 @@
+﻿@model RecruitingATS.ViewModels.SubmitFeedbackViewModel
+
+@{
+    ViewData["Title"] = "Interview Feedback";
+}
+
+<h2>Interview Feedback</h2>
+
+<form asp-action="Feedback" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All"></div>
+
+    <input asp-for="InterviewId" type="hidden" />
+
+    <div>
+        <label asp-for="Rating">Rating (1 to 5)</label>
+        <select asp-for="Rating">
+            <option value="">Select rating</option>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Below expectations</option>
+            <option value="3">3 - Meets expectations</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+        <span asp-validation-for="Rating"></span>
+    </div>
+
+    <div>
+        <label asp-for="Strengths">Strengths</label>
+        <textarea asp-for="Strengths"></textarea>
+        <span asp-validation-for="Strengths"></span>
+    </div>
+
+    <div>
+        <label asp-for="Concerns">Concerns</label>
+        <textarea asp-for="Concerns"></textarea>
+        <span asp-validation-for="Concerns"></span>
+    </div>
+
+    <div>
+        <label asp-for="Recommendation">
+            Recommendation
+        </label>
+        <select asp-for="Recommendation">
+            <option value="">Select recommendation</option>
+            <option value="Strong Hire">Strong Hire</option>
+            <option value="Hire">Hire</option>
+            <option value="Mixed">Mixed</option>
+            <option value="No Hire">No Hire</option>
+        </select>
+        <span asp-validation-for="Recommendation"></span>
+    </div>
+
+    <button type="submit">Submit Feedback</button>
+</form>

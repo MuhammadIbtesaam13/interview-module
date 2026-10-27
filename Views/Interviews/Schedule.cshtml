@@ -1,0 +1,73 @@
+﻿@model RecruitingATS.ViewModels.ScheduleInterviewViewModel
+
+@{
+    ViewData["Title"] = "Schedule Interview";
+}
+
+<h2>Schedule Interview</h2>
+
+<form asp-action="Schedule" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="ApplicationId">
+            Application ID
+        </label>
+        <input asp-for="ApplicationId" type="number" />
+        <span asp-validation-for="ApplicationId"></span>
+    </div>
+
+    <div>
+        <label asp-for="ScheduledAt">
+            Interview Date and Time
+        </label>
+        <input asp-for="ScheduledAt" type="datetime-local" />
+        <span asp-validation-for="ScheduledAt"></span>
+    </div>
+
+    <div>
+        <label asp-for="Type">Interview Type</label>
+        <select asp-for="Type">
+            <option value="">Select type</option>
+            <option value="Technical">Technical</option>
+            <option value="HR">HR</option>
+            <option value="Final">Final</option>
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="Mode">Interview Mode</label>
+        <select asp-for="Mode">
+            <option value="">Select mode</option>
+            <option value="Online">Online</option>
+            <option value="InPerson">In Person</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Panel Employee IDs</label>
+        <p>Enter the employee IDs selected from the authorized panel.</p>
+
+        @for (int i = 0; i < Model.SelectedEmployeeIds.Count; i++)
+        {
+            <input type="hidden"
+                   name="SelectedEmployeeIds[@i]"
+                   value="@Model.SelectedEmployeeIds[i]" />
+        }
+
+        <input name="SelectedEmployeeIds"
+               type="number"
+               placeholder="Employee ID" />
+    </div>
+
+    <div>
+        <label asp-for="LeadEmployeeId">
+            Lead Employee ID
+        </label>
+        <input asp-for="LeadEmployeeId" type="number" />
+    </div>
+
+    <button type="submit">Schedule Interview</button>
+</form>

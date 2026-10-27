@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Interviews";
+}
+
+<h2>Interviews</h2>
+
+@if (TempData["Message"] != null)
+{
+    <p>@TempData["Message"]</p>
+}
+
+<p>
+    <a asp-controller="Interviews"
+       asp-action="Schedule">
+        Schedule New Interview
+    </a>
+</p>
+
+<p>
+    <a asp-controller="Interviews"
+       asp-action="MyInterviews">
+        My Interviews
+    </a>
+</p>

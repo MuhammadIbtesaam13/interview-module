@@ -1,0 +1,52 @@
+﻿@model List<RecruitingATS.Models.Interview>
+
+@{
+    ViewData["Title"] = "My Interviews";
+}
+
+<h2>My Interviews</h2>
+
+@if (TempData["Message"] != null)
+{
+    <p>@TempData["Message"]</p>
+}
+
+@if (Model.Count == 0)
+{
+    <p>You have no assigned interviews.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Interview ID</th>
+                <th>Application ID</th>
+                <th>Date and Time</th>
+                <th>Type</th>
+                <th>Mode</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var interview in Model)
+            {
+                <tr>
+                    <td>@interview.Id</td>
+                    <td>@interview.ApplicationId</td>
+                    <td>@interview.ScheduledAt</td>
+                    <td>@interview.Type</td>
+                    <td>@interview.Mode</td>
+                    <td>@interview.Status</td>
+                    <td>
+                        <a asp-action="Feedback"
+                           asp-route-id="@interview.Id">
+                            Give Feedback
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
